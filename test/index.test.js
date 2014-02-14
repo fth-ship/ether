@@ -1,11 +1,13 @@
 var ether = require('../');
+var queue = require('../lib/queue');
 var assert = require('assert');
 
-describe('Ether', function () {
-  var app = ether({
-    name: 'TestCase'
-  }, queue);
+var app = ether({
+  name: 'TestCase',
+  installed: false
+}, queue);
 
+describe('Ether', function () {
   it('app get name', function () {
     var actual = app.get('name');
     var expected = (actual === 'TestCase');
@@ -41,5 +43,18 @@ describe('Ether', function () {
     var expected = (actual === 3);
 
     assert.ok(expected);
+  });
+
+  it('register make instructions', function () {
+    app.make('install', function (complete) {
+      var self = this;
+
+      self.set('installed', true);
+      complete();
+    });
+    app.make('install');
+    var actual = app.get('installed');
+
+    assert.ok(actual);
   });
 });
