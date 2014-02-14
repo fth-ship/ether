@@ -3,10 +3,17 @@
   "version": "0.0.1",
   "description": "Scaffolding tool.",
   "main": "index.js",
-  "bin": "bin/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bin": "{
+    "ether": "bin/index.js",
   },
+  "scripts": {
+    "test": "mocha test/**/*.test.js -t 50000 -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fth-ship/ether"
+  },
+  "analyze": true,
   "keywords": [
     "scaffolding",
     "generator",

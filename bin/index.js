@@ -2,6 +2,7 @@
 'use strict';
 var program = require('commander');
 var pkg = require('../package');
+var path = require('path');
 var bin = {};
 var ctx = {};
 
