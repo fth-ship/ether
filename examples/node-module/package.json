@@ -1,0 +1,7 @@
+{
+  "name": "{{name}}",
+  "version": "{{version}}",
+  "author": "{{author}}",
+  "public": {{public}},
+  "main": "{{entryPoint}}"
+}
