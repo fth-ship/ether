@@ -7,7 +7,9 @@ function binInstallHandler(filepath) {
   var fileLocation = path.resolve(self.cwd, filepath);
   var load = require(fileLocation);
 
-  load.make('default');
+  load
+    .run('initializer')
+    .make('default');
 
   return self;
 }
