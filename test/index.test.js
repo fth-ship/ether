@@ -4,7 +4,7 @@ var assert = require('assert');
 describe('Ether', function () {
   var app = ether({
     name: 'TestCase'
-  });
+  }, queue);
 
   it('app get name', function () {
     var actual = app.get('name');
