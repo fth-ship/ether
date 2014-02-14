@@ -37,6 +37,26 @@ describe('Ether', function () {
     done();
   });
 
+  it('app template', function (done) {
+    app.run('template', [
+      './test/case/src/template.txt',
+      './test/case/dst/template.txt'
+    ]);
+    var expected = fs.existsSync('./test/case/dst/template.txt');
+
+    assert.ok(expected);
+    done();
+  });
+
+  it('app template content', function (done) {
+    var actual = fs.readFileSync('./test/case/dst/template.txt', 'utf-8');
+    var expected = (actual === 'Hello from TestCase\n');
+
+    assert.ok(expected);
+    fs.unlinkSync('./test/case/dst/template.txt');
+    done();
+  });
+
   after(function () {
     fs.rmdirSync('./test/case/dst');
   });

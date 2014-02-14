@@ -11,6 +11,9 @@
     "generator",
     "manager"
   ],
+  "dependencies": {
+    "micro-engine": "latest"
+  },
   "author": "Kaique da Silva <kaique.developer@gmai.com>",
   "license": "ISC"
 }
