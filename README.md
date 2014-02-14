@@ -7,7 +7,9 @@ a programmatic way.
 
 ## Installation
 
+  ```
   [sudo] npm i ether
+  ```
 
 ## API
 
@@ -44,10 +46,12 @@ a programmatic way.
 
 #### Default tasks
 
+  ```javascript
   app.run('mkdir', [destiny]);
   app.run('copy', [source, destiny]);
   // using the context of get and set and first object
   app.run('template', [source, destiny]);
+  ```
 
 ### Run
 
@@ -73,16 +77,28 @@ a programmatic way.
 
 ### Install the cli
 
+  ```
   [sudo] npm i -g ether
+  ```
 
 ### Use the '--install' option
 
+  ```
   ether -i // this instruction read the etherfile.js
+  ```
 
 ### Global scaffolding
 
+  ```
   sudo npm i -g ether-gen
+  ```
 
+  and
+
+  ```
   ether -i ether-gen
+  ```
 
 [WIP]
+
+Created by Kaique da Silva <kaique.developer@gmail.com>
