@@ -1,0 +1,16 @@
+{
+  "name": "ether",
+  "version": "0.0.1",
+  "description": "Scaffolding tool.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scaffolding",
+    "generator",
+    "manager"
+  ],
+  "author": "Kaique da Silva <kaique.developer@gmai.com>",
+  "license": "ISC"
+}
