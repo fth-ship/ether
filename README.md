@@ -51,6 +51,8 @@ a programmatic way.
   app.run('copy', [source, destiny]);
   // using the context of get and set and first object
   app.run('template', [source, destiny]);
+  // to fill vars use
+  app.run('prompt', [[{type:'input', name: 'name', message: 'Whats the name of that application?'}]]);
   ```
 
 ### Run
@@ -77,25 +79,25 @@ a programmatic way.
 
 ### Install the cli
 
-  ```
+  ```shell
   [sudo] npm i -g ether
   ```
 
 ### Use the '--install' option
 
-  ```
+  ```shell
   ether -i // this instruction read the etherfile.js
   ```
 
 ### Global scaffolding
 
-  ```
-  sudo npm i -g ether-gen
+  ```shell
+  [sudo] npm i -g ether-gen
   ```
 
   and
 
-  ```
+  ```shell
   ether -i ether-gen
   ```
 
