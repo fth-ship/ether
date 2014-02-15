@@ -4,7 +4,7 @@
   "description": "Simple scaffolding tool.",
   "main": "index.js",
   "bin": {
-    "ether": "index.js"
+    "ether": "bin/index.js"
   },
   "directories": {
     "example": "examples",
