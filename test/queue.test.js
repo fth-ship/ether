@@ -8,7 +8,7 @@ describe('Ether', function () {
   var context = {
     name: 'TestCase'
   };
-  var app = ether(context, queue);
+  var app = ether(context);
 
   it('app banner', function (done) {
     app.run('initializer');
