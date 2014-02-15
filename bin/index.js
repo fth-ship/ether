@@ -18,5 +18,5 @@ program
 
 if (program.install) {
   ctx.cwd = process.cwd();
-  bin.install.call(ctx, process.install);
+  bin.install.call(ctx, program.install);
 }
