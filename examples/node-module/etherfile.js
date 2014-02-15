@@ -1,10 +1,28 @@
 var ether = require('ether');
 var nodeModule = ether({
-  name: 'Node Module Example',
-  version: '0.0.1',
-  entryPoint: 'index.js',
-  author: 'Kaique da Silva <kaique.developer@gmail.com>',
-  public: true,
+  questions: [{
+    type: 'input',
+    name: 'name',
+    message: 'Whats the name of the module?'
+  }, {
+    type: 'input',
+    name: 'version',
+    message: 'Whats the version of the module?'
+  }, {
+    type: 'input',
+    name: 'entryPoint',
+    message: 'What the entry point of the module?',
+    default: 'index.js',
+  }, {
+    type: 'input',
+    name: 'author',
+    message: 'Who is the author of the module?'
+  }, {
+    type: '',
+    name: 'public',
+    message: 'This module is public?',
+    default: true
+  }],
   tree: [
     ['node-module'],
     ['node-module/bin'],
@@ -12,6 +30,10 @@ var nodeModule = ether({
     ['node-module/examples'],
     ['node-module/test']
   ],
+});
+
+nodeModule.task('questions', function (doneHandler) {
+  nodeModule.run('prompt', [nodeModule.get('questions'), doneHandler]);
 });
 
 nodeModule.task('build', function () {
@@ -36,20 +58,14 @@ nodeModule.task('seed', function () {
   return self;
 });
 
-nodeModule.make('create', function () {
-  var self = this;
-
-  self
-    .run('build')
-    .run('seed');
-
-  return self;
-});
-
 nodeModule.make('default', function () {
   var self = this;
 
-  self.make('create');
+  function doneHandler() {
+    nodeModule.run('build');
+    nodeModule.run('seed');
+  }
+  nodeModule.run('questions', [doneHandler]);
 
   return self;
 });

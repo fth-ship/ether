@@ -1,28 +1,36 @@
 {
   "name": "ether",
-  "version": "0.0.1",
-  "description": "Scaffolding tool.",
-  "bin": {
-    "ether": "./bin/index.js"
-  },
+  "version": "0.0.2",
+  "description": "Simple scaffolding tool.",
   "main": "index.js",
+  "bin": {
+    "ether": "index.js"
+  },
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "dependencies": {
+    "commander": "~2.1.0",
+    "inquirer": "~0.4.0",
+    "micro-engine": "0.0.1"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "mocha test/**/*.test.js -t 50000 -R spec"
+    "test": "mocha test/**/*.test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:fth-ship/ether.git"
+    "url": "git://github.com/fth-ship/ether.git"
   },
   "keywords": [
     "scaffolding",
-    "generator",
-    "manager"
+    "generator"
   ],
-  "dependencies": {
-    "micro-engine": "latest",
-    "commander": "~2.1.0",
-    "inquirer": "~0.4.0"
+  "author": "Kaique da Silva <kaique.developer@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fth-ship/ether/issues"
   },
-  "author": "Kaique da Silva <kaique.developer@gmai.com>",
-  "license": "ISC"
+  "homepage": "https://github.com/fth-ship/ether"
 }
