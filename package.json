@@ -1,6 +1,6 @@
 {
   "name": "ether",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple scaffolding tool.",
   "main": "./lib/index.js",
   "bin": {
@@ -13,7 +13,8 @@
   "dependencies": {
     "commander": "~2.1.0",
     "inquirer": "~0.4.0",
-    "micro-engine": "0.0.1"
+    "micro-engine": "0.0.1",
+    "superagent": "~0.16.0"
   },
   "devDependencies": {},
   "scripts": {

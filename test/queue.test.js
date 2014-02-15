@@ -57,6 +57,28 @@ describe('Ether', function () {
     done();
   });
 
+  it('app download', function(done) {
+    function completeHandler() {
+      var expected = fs.existsSync('./test/case/dst/download.txt');
+      assert.ok(expected);
+      done();
+    }
+    app.run('download', [
+      'https://gist.github.com/kaiquewdev/9022884/raw/3094642f4eebb06064315a904d25a55a09d257ad/case.txt',
+      './test/case/dst/download.txt',
+      completeHandler
+    ]);
+  });
+
+  it('app download content', function (done) {
+    var actual = fs.readFileSync('./test/case/dst/download.txt', 'utf-8');
+    var expected = (actual === 'Hello from TestCase');
+
+    assert.ok(expected);
+    fs.unlinkSync('./test/case/dst/download.txt');
+    done();
+  });
+
   after(function () {
     fs.rmdirSync('./test/case/dst');
   });
