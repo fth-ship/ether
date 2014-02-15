@@ -3,8 +3,11 @@
 var program = require('commander');
 var pkg = require('../package');
 var path = require('path');
+var ether = require('./');
 var bin = {};
 var ctx = {};
+
+global.ether = ether;
 
 bin.install = require('./install');
 
