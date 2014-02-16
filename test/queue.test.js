@@ -3,12 +3,15 @@ var ether = require('../');
 var queue = require('../lib/queue');
 var assert = require('assert');
 var fs = require('fs');
+var server = require('./case/server');
 
 describe('Ether', function () {
   var context = {
     name: 'TestCase'
   };
   var app = ether(context);
+
+  server.listen(3000);
 
   it('app banner', function (done) {
     app.run('initializer');
@@ -64,7 +67,7 @@ describe('Ether', function () {
       done();
     }
     app.run('download', [
-      'https://gist.github.com/kaiquewdev/9022884/raw/3094642f4eebb06064315a904d25a55a09d257ad/case.txt',
+      'http://localhost:3000',
       './test/case/dst/download.txt',
       completeHandler
     ]);
