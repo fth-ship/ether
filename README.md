@@ -232,13 +232,13 @@ a programmatic way.
 ### Global scaffolding
 
   ```shell
-  [sudo] npm i -g ether-gen
+  [sudo] npm i -g ether-node-module
   ```
 
   and
 
   ```shell
-  ether -i ether-gen
+  ether -i ether-node-module
   ```
 
   Or using this way to install one scaffolding from npm,
