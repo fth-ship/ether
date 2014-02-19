@@ -1,5 +1,9 @@
 # Ether
 
+## Status
+
+[![Build Status](https://travis-ci.org/fth-ship/ether.png?branch=master)](https://travis-ci.org/fth-ship/ether)
+
 ## Description
 
 Ether is a simple tool to make scaffolding easy, and fun in
@@ -124,6 +128,90 @@ a programmatic way.
   And run a bunch of tasks.
 
 ## Ether file
+
+### Example
+
+  ```javascript
+  'use strict';
+  var path = require('path');
+  var ether = require('ether');
+  var nodeModule = ether({
+    questions: [{
+      type: 'input',
+      name: 'name',
+      message: 'Whats the name of the module?'
+    }, {
+      type: 'input',
+      name: 'version',
+      message: 'Whats the version of the module?',
+      default: '0.0.1'
+    }, {
+      type: 'input',
+      name: 'entryPoint',
+      message: 'What the entry point of the module?',
+      default: 'index.js',
+    }, {
+      type: 'input',
+      name: 'author',
+      message: 'Who is the author of the module?'
+    }, {
+      type: '',
+      name: 'public',
+      message: 'This module is public?',
+      default: true
+    }],
+    tree: [
+      ['$module-name'],
+      ['$module-name/bin'],
+      ['$module-name/lib'],
+      ['$module-name/examples'],
+      ['$module-name/test']
+    ],
+  });
+
+  nodeModule.task('questions', function (doneHandler) {
+    nodeModule.run('prompt', [nodeModule.get('questions'), doneHandler]);
+  });
+
+  nodeModule.task('build', function () {
+    var self = this;
+
+    self.get('tree').map(function (item) {
+      self.run('mkdir', item.replace('$module-name', self.get('name')));
+    });
+
+    return self;
+  });
+
+  nodeModule.task('seed', function (cb) {
+    var self = this;
+
+    self
+      .run('download', [
+        'https://gist.github.com/kaiquewdev/9087288/raw/b7d70fc5e3aad9e04b6549bc4239f38f1149af5c/ether-package.json',
+        './node-module/package.json',
+        cb
+      ]);
+
+    return self;
+  });
+
+  nodeModule.make('default', function () {
+    var self = this;
+
+    function doneHandler() {
+      nodeModule.run('build');
+      nodeModule.run('seed', [function () {
+        console.log('Download was completed and template too.');
+      }]);
+    }
+    nodeModule.run('questions', [doneHandler]);
+
+    return self;
+  });
+
+  module.exports = exports = nodeModule;
+  ```
 
 ### Install the cli
 
