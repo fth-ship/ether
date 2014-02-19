@@ -177,7 +177,8 @@ a programmatic way.
     var self = this;
 
     self.get('tree').map(function (item) {
-      self.run('mkdir', item.replace('$module-name', self.get('name')));
+      item[0] = item[0].replace('$module-name', self.get('name'));
+      self.run('mkdir', item);
     });
 
     return self;
@@ -189,7 +190,7 @@ a programmatic way.
     self
       .run('download', [
         'https://gist.github.com/kaiquewdev/9087288/raw/b7d70fc5e3aad9e04b6549bc4239f38f1149af5c/ether-package.json',
-        './node-module/package.json',
+        './$module-name/package.json'.replace('$module-name', self.get('name')),
         cb
       ]);
 
