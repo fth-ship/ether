@@ -225,7 +225,7 @@ a programmatic way.
 ### Use the '--install' option
 
   ```shell
-  ether -i // this instruction read the etherfile.js
+  ether -i etherfile.js
   ```
 
   The install option use the `etherfile.js` or and module installed.
@@ -240,6 +240,10 @@ a programmatic way.
 
   ```shell
   ether -i ether-node-module
+
+  or
+
+  ether -i node_modules/ether-node-module
   ```
 
   Or using this way to install one scaffolding from npm,
