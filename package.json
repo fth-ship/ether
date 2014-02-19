@@ -24,7 +24,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "mocha test/**/*.test.js"
+    "test": "gulp"
   },
   "repository": {
     "type": "git",
