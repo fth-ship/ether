@@ -1,15 +1,15 @@
 'use strict';
-var fs = require('fs');
-var path = require('path');
 
 function binInstallHandler(filepath) {
+  /* jshint validthis: true */
   var self = this;
-  var filepath = (filepath || 'etherfile.js');
-  var fileLocation = path.resolve(self.cwd, filepath);
-  var hasFileLocation = (fs.existsSync(fileLocation));
-  var load = (hasFileLocation ? fileLocation : filepath);
-
-  load = require(load);
+  var fs = require('fs');
+  var path = require('path');
+  var filePath = (filepath || 'etherfile.js');
+  var fileLocation = path.resolve(self.cwd, filePath);
+  var hasFileLocation = fs.existsSync(fileLocation);
+  var fileLocationPath = (hasFileLocation ? fileLocation : filePath);
+  var load = require(fileLocationPath);
 
   load
     .run('initializer')

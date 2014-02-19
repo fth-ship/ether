@@ -60,7 +60,7 @@ describe('Ether', function () {
     done();
   });
 
-  it('app download', function(done) {
+  it('app download', function (done) {
     function completeHandler() {
       var expected = fs.existsSync('./test/case/dst/download.txt');
       assert.ok(expected);
