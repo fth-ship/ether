@@ -14,7 +14,9 @@
     "commander": "~2.1.0",
     "inquirer": "~0.4.0",
     "micro-engine": "0.0.1",
-    "superagent": "~0.16.0",
+    "superagent": "~0.16.0"
+  },
+  "devDependencies": {
     "gulp-util": "~2.2.14",
     "gulp": "~3.5.2",
     "gulp-watch": "~0.5.0",
@@ -22,7 +24,6 @@
     "gulp-jshint": "~1.4.2",
     "jshint-stylish": "~0.1.5"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "gulp"
   },
