@@ -117,6 +117,12 @@ a programmatic way.
 
   The install option use the `etherfile.js` or and module installed.
 
+## To run make tasks registered in the etherfile use
+
+  ```shell
+  ether -u [etherfile] -m [task-name]
+  ```
+
 ### Global scaffolding
 
   ```shell
