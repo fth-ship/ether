@@ -15,7 +15,8 @@
     "inquirer": "~0.4.0",
     "micro-engine": "0.0.1",
     "superagent": "~0.16.0",
-    "memoizee": "~0.2.6"
+    "memoizee": "~0.2.6",
+    "sudo-block": "~0.3.0"
   },
   "devDependencies": {
     "gulp-util": "~2.2.14",

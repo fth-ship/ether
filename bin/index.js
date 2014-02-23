@@ -4,6 +4,7 @@ var program = require('commander');
 var pkg = require('../package');
 var path = require('path');
 var ether = require('./');
+var sudoBlock = require('sudo-block');
 var bin = {};
 var ctx = {};
 
@@ -19,6 +20,8 @@ program
   .option('-m, --make [name]', 'Make run a task')
   .parse(process.argv);
 
+sudoBlock();
+
 if (program.install || (program.user)) {
   ctx.cwd = process.cwd();
   bin.install.call(ctx, program.install);
@@ -26,3 +29,5 @@ if (program.install || (program.user)) {
   ctx.cwd = process.cwd();
   bin.make.call(ctx, program.user, program.make);
 }
+
+module.exports = exports = bin;
