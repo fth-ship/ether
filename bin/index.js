@@ -5,6 +5,7 @@ var pkg = require('../package');
 var path = require('path');
 var ether = require('./');
 var sudoBlock = require('sudo-block');
+var help = require('./doc/bin/help');
 var bin = {};
 var ctx = {};
 
@@ -15,9 +16,9 @@ bin.make = require('./make');
 
 program
   .version('0.0.1')
-  .option('-i, --install [path]', 'Install a new application based on scaffolding.')
-  .option('-u, --use [path]', 'Use a ether module')
-  .option('-m, --make [name]', 'Make run a task')
+  .option(help.install.usage, help.install.description)
+  .option(help.use.usage, help.use.description)
+  .option(help.make.usage, help.make.usage)
   .parse(process.argv);
 
 sudoBlock();
