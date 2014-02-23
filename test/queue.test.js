@@ -7,7 +7,11 @@ var server = require('./case/server');
 
 describe('Ether', function () {
   var context = {
-    name: 'TestCase'
+    name: 'TestCase',
+    dstName: 'dst',
+    copyFileName: 'copy.txt',
+    templateFileName: 'template.txt',
+    downloadFileName: 'download.txt',
   };
   var app = ether(context);
 
@@ -20,7 +24,7 @@ describe('Ether', function () {
 
   it('app mkdir', function (done) {
     app.run('mkdir', [
-      './test/case/dst',
+      './test/case/{{dstName}}',
     ]);
     var expected = fs.existsSync('./test/case/dst');
 
@@ -30,8 +34,8 @@ describe('Ether', function () {
 
   it('app copy', function (done) {
     app.run('copy', [
-      './test/case/src/copy.txt',
-      './test/case/dst/copy.txt'
+      './test/case/src/{{copyFileName}}',
+      './test/case/dst/{{copyFileName}}'
     ]);
     var expected = fs.existsSync('./test/case/dst/copy.txt');
 
@@ -42,8 +46,8 @@ describe('Ether', function () {
 
   it('app template', function (done) {
     app.run('template', [
-      './test/case/src/template.txt',
-      './test/case/dst/template.txt'
+      './test/case/src/{{templateFileName}}',
+      './test/case/dst/{{templateFileName}}'
     ]);
     var expected = fs.existsSync('./test/case/dst/template.txt');
 
@@ -68,7 +72,7 @@ describe('Ether', function () {
     }
     app.run('download', [
       'http://localhost:3000',
-      './test/case/dst/download.txt',
+      './test/case/dst/{{downloadFileName}}',
       completeHandler
     ]);
   });
@@ -80,6 +84,16 @@ describe('Ether', function () {
     assert.ok(expected);
     fs.unlinkSync('./test/case/dst/download.txt');
     done();
+  });
+
+  it('should be the context replaced in mkdir', function () {
+    app.set('testDir', 'test-dir');
+    app.run('mkdir', ['./test/case/dst/{{testDir}}']);
+
+    var expected = fs.existsSync('./test/case/dst/test-dir');
+
+    assert.ok(expected);
+    fs.rmdirSync('./test/case/dst/test-dir');
   });
 
   after(function () {

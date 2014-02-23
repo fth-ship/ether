@@ -2,6 +2,7 @@
 var eutil = require('../lib/util');
 var path = require('path');
 var assert = require('assert');
+var util = require('util');
 
 describe('Ether util', function () {
   it('load file', function () {
@@ -22,5 +23,27 @@ describe('Ether util', function () {
     var expected = (actual === null);
 
     assert.ok(expected);
+  });
+
+  it('should be change arguments to array', function () {
+    (function () {
+      var actual = eutil.toArray(arguments);
+      var expected = util.isArray(actual);
+      var out = [1, 2, 3];
+
+      assert.ok(expected);
+      assert.deepEqual(actual, out);
+    })(1, 2, 3);
+  });
+
+  it('should be arguments replaced by context', function () {
+    var actual = eutil.args([
+      '{{name}}/test'
+    ], {
+      name: 'hello'
+    });
+    var expected = ['hello/test'];
+
+    assert.deepEqual(actual, expected);
   });
 });
