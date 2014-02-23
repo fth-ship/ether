@@ -15,6 +15,127 @@ a programmatic way.
   [sudo] npm i ether
   ```
 
+## Ether file
+
+### Example
+
+  ```javascript
+  'use strict';
+  var path = require('path');
+  var ether = require('ether');
+  var nodeModule = ether({
+    questions: [{
+      type: 'input',
+      name: 'name',
+      message: 'Whats the name of the module?'
+    }, {
+      type: 'input',
+      name: 'version',
+      message: 'Whats the version of the module?',
+      default: '0.0.1'
+    }, {
+      type: 'input',
+      name: 'entryPoint',
+      message: 'What the entry point of the module?',
+      default: 'index.js',
+    }, {
+      type: 'input',
+      name: 'author',
+      message: 'Who is the author of the module?'
+    }, {
+      type: '',
+      name: 'public',
+      message: 'This module is public?',
+      default: true
+    }],
+    tree: [
+      ['{{name}}'],
+      ['{{name}}/bin'],
+      ['{{name}}/lib'],
+      ['{{name}}/examples'],
+      ['{{name}}/test']
+    ],
+  });
+
+  nodeModule.task('questions', function (doneHandler) {
+    nodeModule.run('prompt', [nodeModule.get('questions'), doneHandler]);
+  });
+
+  nodeModule.task('build', function () {
+    var self = this;
+
+    self.get('tree').map(function (item) {
+      self.run('mkdir', item);
+    });
+
+    return self;
+  });
+
+  nodeModule.task('seed', function (cb) {
+    var self = this;
+
+    self
+      .run('download', [
+        'https://gist.github.com/kaiquewdev/9087288/raw/b7d70fc5e3aad9e04b6549bc4239f38f1149af5c/ether-package.json',
+        './{{name}}/package.json'),
+        cb
+      ]);
+
+    return self;
+  });
+
+  nodeModule.make('default', function () {
+    var self = this;
+
+    function doneHandler() {
+      nodeModule.run('build');
+      nodeModule.run('seed', [function () {
+        console.log('Download was completed and template too.');
+      }]);
+    }
+    nodeModule.run('questions', [doneHandler]);
+
+    return self;
+  });
+
+  module.exports = exports = nodeModule;
+  ```
+
+### Install the cli
+
+  ```shell
+  [sudo] npm i -g ether
+  ```
+
+  Use the cli tool, to run scaffolding, to generate new applications.
+
+### Use the '--install' option
+
+  ```shell
+  ether -i etherfile.js
+  ```
+
+  The install option use the `etherfile.js` or and module installed.
+
+### Global scaffolding
+
+  ```shell
+  [sudo] npm i -g ether-node-module
+  ```
+
+  and
+
+  ```shell
+  ether -i ether-node-module
+
+  or
+
+  ether -i node_modules/ether-node-module
+  ```
+
+  Or using this way to install one scaffolding from npm,
+  and run this scaffolding app.
+
 ## API
 
 ### Instance
@@ -127,132 +248,7 @@ a programmatic way.
 
   And run a bunch of tasks.
 
-## Ether file
-
-### Example
-
-  ```javascript
-  'use strict';
-  var path = require('path');
-  var ether = require('ether');
-  var nodeModule = ether({
-    questions: [{
-      type: 'input',
-      name: 'name',
-      message: 'Whats the name of the module?'
-    }, {
-      type: 'input',
-      name: 'version',
-      message: 'Whats the version of the module?',
-      default: '0.0.1'
-    }, {
-      type: 'input',
-      name: 'entryPoint',
-      message: 'What the entry point of the module?',
-      default: 'index.js',
-    }, {
-      type: 'input',
-      name: 'author',
-      message: 'Who is the author of the module?'
-    }, {
-      type: '',
-      name: 'public',
-      message: 'This module is public?',
-      default: true
-    }],
-    tree: [
-      ['$module-name'],
-      ['$module-name/bin'],
-      ['$module-name/lib'],
-      ['$module-name/examples'],
-      ['$module-name/test']
-    ],
-  });
-
-  nodeModule.task('questions', function (doneHandler) {
-    nodeModule.run('prompt', [nodeModule.get('questions'), doneHandler]);
-  });
-
-  nodeModule.task('build', function () {
-    var self = this;
-
-    self.get('tree').map(function (item) {
-      item[0] = item[0].replace('$module-name', self.get('name'));
-      self.run('mkdir', item);
-    });
-
-    return self;
-  });
-
-  nodeModule.task('seed', function (cb) {
-    var self = this;
-
-    self
-      .run('download', [
-        'https://gist.github.com/kaiquewdev/9087288/raw/b7d70fc5e3aad9e04b6549bc4239f38f1149af5c/ether-package.json',
-        './$module-name/package.json'.replace('$module-name', self.get('name')),
-        cb
-      ]);
-
-    return self;
-  });
-
-  nodeModule.make('default', function () {
-    var self = this;
-
-    function doneHandler() {
-      nodeModule.run('build');
-      nodeModule.run('seed', [function () {
-        console.log('Download was completed and template too.');
-      }]);
-    }
-    nodeModule.run('questions', [doneHandler]);
-
-    return self;
-  });
-
-  module.exports = exports = nodeModule;
-  ```
-
-### Install the cli
-
-  ```shell
-  [sudo] npm i -g ether
-  ```
-
-  Use the cli tool, to run scaffolding, to generate new applications.
-
-### Use the '--install' option
-
-  ```shell
-  ether -i etherfile.js
-  ```
-
-  The install option use the `etherfile.js` or and module installed.
-
-### Global scaffolding
-
-  ```shell
-  [sudo] npm i -g ether-node-module
-  ```
-
-  and
-
-  ```shell
-  ether -i ether-node-module
-
-  or
-
-  ether -i node_modules/ether-node-module
-  ```
-
-  Or using this way to install one scaffolding from npm,
-  and run this scaffolding app.
-
-### Trick
-
-  To make module runnable, use the bunch `default` in the `make`,
-  method defining and running by the way.
+## Note
 
 [WIP]
 
